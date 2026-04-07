@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Nilofar</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;1,600&family=Great+Vibes&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -29,7 +29,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.8s ease-in-out;
         }
 
         /* Interface 1: Universe Theme */
@@ -45,8 +45,8 @@
         }
 
         #moon {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             background-color: #f8c3d0;
             border-radius: 50%;
             box-shadow: 0 0 20px #f8c3d0, 0 0 60px #f8c3d0, 0 0 100px #f5a9b8;
@@ -56,15 +56,15 @@
             -webkit-tap-highlight-color: transparent;
         }
         #moon:active {
-            transform: scale(0.9);
+            transform: scale(0.85);
         }
 
         #interface1-text {
             margin-top: 40px;
             font-family: 'Dancing Script', cursive;
-            font-size: 2.2em;
+            font-size: 2.5em;
             color: #f0e6ef;
-            text-shadow: 0 0 10px #f8c3d0;
+            text-shadow: 0 0 15px rgba(248, 195, 208, 0.8);
             padding: 0 20px;
         }
 
@@ -81,12 +81,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: #000;
         }
 
         video {
-            max-width: 100%;
-            max-height: 100%;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* Final Popup */
@@ -95,49 +96,77 @@
             z-index: 100;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            background-color: rgba(0,0,0,0.3);
+            background-color: rgba(0,0,0,0.5);
+            opacity: 0;
         }
 
         #final-popup-content {
-            background-color: rgba(26, 26, 46, 0.9);
-            padding: 25px;
-            border-radius: 20px;
-            font-size: 1.5em;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 194, 209, 0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 30px rgba(255, 194, 209, 0.2);
+            max-width: 85%;
+            width: 400px;
+        }
+
+        .main-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            line-height: 1.4;
             color: #ffc2d1;
-            border: 1px solid #ffc2d1;
-            box-shadow: 0 0 30px rgba(255,194,209,0.4);
-            max-width: 80%;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5em;
+            color: #fff;
+            margin-top: 15px;
+            display: block;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .emoji-span {
+            font-size: 0.8em;
+            vertical-align: middle;
         }
 
         @media (max-width: 480px) {
-            #interface1-text { font-size: 1.6em; }
-            #moon { width: 100px; height: 100px; }
+            #interface1-text { font-size: 1.8em; }
+            #moon { width: 110px; height: 110px; }
+            .main-quote { font-size: 1.4em; }
+            .signature { font-size: 2em; }
         }
     </style>
 </head>
 <body>
 
-    <!-- First Screen -->
+    <!-- Screen 1: The Interactive Moon -->
     <div id="interface1" class="interface">
         <div id="moon"></div>
         <p id="interface1-text">Every beat of my heart started with you</p>
     </div>
 
-    <!-- Video Screen -->
+    <!-- Screen 2: The Video Message -->
     <div id="interface2" class="interface">
         <div id="video-container">
             <video id="myVideo" playsinline>
                 <source src="https://raw.githubusercontent.com/maryam-FOLDS/Sukhpreet/main/VID-20260406-WA0011.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
         </div>
     </div>
 
-    <!-- Final Message -->
+    <!-- Screen 3: The Final Elegant Card -->
     <div id="final-popup" class="interface">
         <div id="final-popup-content">
-            One life , one love , one heart ,one person and its always you . 
-                 ( HARMAN ) 🎀🌍
+            <div class="main-quote">
+                One life, one love, one heart, one person and its always you.
+            </div>
+            <div class="signature">
+                ( HARMAN ) <span class="emoji-span">🎀🌍</span>
+            </div>
         </div>
     </div>
 
@@ -149,42 +178,41 @@
         const finalPopup = document.getElementById('final-popup');
 
         let tapCount = 0;
-        const requiredTaps = 5; // Moon needs to be tapped 5 times
+        const requiredTaps = 5; 
 
+        // Moon interaction logic
         moon.addEventListener('click', () => {
             tapCount++;
             
-            // Visual feedback
-            moon.style.transform = "scale(1.1)";
+            // Animation feel
+            moon.style.transform = "scale(1.15)";
             setTimeout(() => moon.style.transform = "scale(1)", 100);
 
             if (tapCount >= requiredTaps) {
-                startVideoExperience();
+                switchToVideo();
             }
         });
 
-        function startVideoExperience() {
+        function switchToVideo() {
             interface1.style.opacity = '0';
             setTimeout(() => {
                 interface1.style.display = 'none';
                 interface2.style.display = 'flex';
                 video.play().catch(err => {
-                    console.log("Autoplay prevented, waiting for user interaction");
-                    // Show a message or play button if browser blocks video
+                    console.log("Auto-play interaction required");
+                    // Fallback for browsers that block auto-play
+                    interface2.addEventListener('click', () => video.play(), {once: true});
                 });
-            }, 500);
+            }, 800);
         }
 
-        // Show the final popup when the video ends
+        // Trigger final card after video finishes
         video.onended = function() {
             finalPopup.style.display = 'flex';
-            finalPopup.style.opacity = '1';
+            setTimeout(() => {
+                finalPopup.style.opacity = '1';
+            }, 100);
         };
-
-        // Also allow clicking video to show popup early if user is impatient
-        video.addEventListener('click', () => {
-            if (video.paused) video.play();
-        });
     </script>
 
 </body>
